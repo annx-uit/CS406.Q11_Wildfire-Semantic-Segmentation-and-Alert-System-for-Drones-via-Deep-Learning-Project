@@ -17,6 +17,7 @@
 <p align="center">
   <img src="thumbnail.png" alt="thumbnaill" width="400">
 </p>
+
 ---
 
 ## **Team Information**
@@ -191,7 +192,7 @@ python gradio_app.py
 A screenshot of the demo interface is available at:
 
 ```text
-demo_gif.gif
+demo/demo_gif.gif
 ```
 <p align="center">
   <img src="demo/demo_gif.gif" alt="CS406.Q11_Wildfire-Semantic-Segmentation-and-Alert-System-for-Drones-via-Deep-Learning-Project Demo" width="900">
