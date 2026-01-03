@@ -13,6 +13,10 @@
 >
 > The project leverages **U-Net–based architectures** trained on the **FLAME Dataset** to detect wildfire regions from aerial imagery captured by drones. In addition to pixel-level fire segmentation, the system incorporates **temporal consistency analysis** and a **rule-based alert mechanism** to trigger wildfire warnings in video streams.
 
+
+<p align="center">
+  <img src="thumbnail.png" alt="thumbnaill" width="400">
+</p>
 ---
 
 ## **Team Information**
@@ -184,6 +188,14 @@ python gradio_app.py
 - Visualize wildfire segmentation masks
 - View alert metadata in real time
 
+A screenshot of the demo interface is available at:
+
+```text
+demo_gif.gif
+```
+<p align="center">
+  <img src="demo/demo_gif.gif" alt="CS406.Q11_Wildfire-Semantic-Segmentation-and-Alert-System-for-Drones-via-Deep-Learning-Project Demo" width="900">
+</p>
 --- 
 ## **Results**
 - Accurate pixel-level wildfire segmentation on the FLAME dataset.
