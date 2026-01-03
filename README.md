@@ -54,7 +54,7 @@
 
 ## Dataset
 ### FLAME Dataset
-- **Source**: FLAME Dataset (IEEE DataPort)
+- **Source**: All evaluations are conducted using the FLAME Dataset, published on IEEE DataPort. Dataset access: [FLAME Dataset on IEEE DataPort](https://ieee-dataport.org/open-access/flame-dataset-aerial-imagery-pile-burn-detection-using-drones-uavs)
 - **Original format**:
   - RGB images (`.jpg`)
   - Binary fire masks (`.png`)
