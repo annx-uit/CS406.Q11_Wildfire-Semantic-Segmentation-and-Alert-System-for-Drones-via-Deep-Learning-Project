@@ -115,31 +115,29 @@ CS406.Q11_Wildfire-Semantic-Segmentation-and-Alert-System-for-Drones-via-Deep-Le
 
 ## **Methodology**
 
-### 1. Semantic Segmentation Model
-- Architecture: **U-Net**
-- Encoder: **ResNet34 / ResNet50**
-- Frameworks:
-  - `segmentation-models-pytorch`
-  - `PyTorch Lightning`
+[cite_start]The system follows a modular pipeline designed through computational thinking principles (Abstraction, Decomposition, and Pattern Recognition) to transform raw sensor data into actionable wildfire alerts[cite: 163, 166].
 
-### 2. Training Pipeline
-- Input size: `512 × 512`
-- Loss functions:
-  - Binary Cross-Entropy
-  - Dice Loss (optional experiments)
-- Mixed-precision training (FP16)
-- Model checkpointing using `.ckpt` format
+### **1. Semantic Segmentation Architecture**
+* [cite_start]**Core Model**: The system utilizes a **U-Net** architecture, a premier choice for biomedical and environmental image segmentation due to its symmetrical encoder-decoder structure[cite: 28, 141].
+* **Encoders**: We implemented **ResNet34** and **ResNet50** backbones to leverage deep residual learning, enhancing feature extraction from complex forest textures.
+* **Loss Functions**: To address the class imbalance inherent in wildfire imagery (where fire pixels occupy a small fraction of the frame), we experimented with **Binary Cross-Entropy (BCE)** and a **Composite 3-Loss function** (BCE + Dice Loss + IoU Loss) to optimize both pixel-wise accuracy and region overlap.
 
-### 3. Temporal Fire Detection Logic
-To reduce false positives in video streams:
-- Fire regions must persist across multiple consecutive frames.
-- Alert score is computed using: **Score = w_area × AreaRatio + w_prob × Confidence + w_persist × Persistence**
+### **2. Multi-Modal Feature Recognition**
+The model is trained to recognize distinct wildfire patterns across two spectrums:
+* [cite_start]**RGB Visual Cues**: Identifying irregular, high-intensity color clusters (red, orange, yellow) and the soft-edged, upward-moving cloud textures characteristic of smoke[cite: 66, 68].
+* [cite_start]**Thermal Signatures**: Detecting localized "heat blobs" or saturated spots that represent physical temperature anomalies, allowing the system to filter out visual artifacts like sunlight glare or lens flare[cite: 76, 111].
 
-### 4. Alert Mechanism
-- Hysteresis thresholds:
-  - **EVENT_ON**: Trigger fire alert
-  - **EVENT_OFF**: Reset detection state
-- Periodic alert logging with timestamp and dummy GPS metadata.
+
+
+### **3. Temporal Consistency & Alert Logic**
+To ensure high reliability and minimize false positives in live video streams, we implemented a temporal validation loop:
+* **Hysteresis Thresholding**: Instead of a single static threshold, the system uses dual-score thresholds:
+    * [cite_start]**EVENT_ON ($\ge 0.6$)**: Triggers the **FIRE** state[cite: 257, 270].
+    * [cite_start]**EVENT_OFF ($< 0.4$)**: Resets the system to **NO_FIRE**[cite: 257, 272].
+* [cite_start]**Persistence Analysis**: A fire alert is only issued if the detection persists across consecutive frames within a 3-second check interval, ensuring that transient glares are ignored[cite: 258, 276].
+
+### **4. Geospatial Localization**
+[cite_start]For every detected fire region, the system calculates the geometric centroid of the segmentation mask[cite: 43, 225]. [cite_start]By fusing the drone's real-time **GPS coordinates** (latitude, longitude, altitude) with camera orientation metadata (yaw, pitch, roll), the system estimates the ground-truth coordinates of the fire using the **Haversine formula**[cite: 225, 336].
 
 ---
 
@@ -165,27 +163,38 @@ pip install -r requirements.txt
 
 --- 
 ## **Usage**
-
-### Dataset preprocessing
+### 1. Training & Research
+**Dataset preprocessing:**
 ```bash
 jupyter notebook src/split_flame_raw-dataset.ipynb
 ```
-### Model training
+
+**Model training:**
 ```bash
 jupyter notebook src/train-models.ipynb
 ```
-### Model evaluation
+
+**Model evaluation:**
 ```bash
 jupyter notebook src/model-evaluation.ipynb
 ```
 
----
-## **Demo Application**
-Run the Gradio demo for video-based wildfire detection:
+### 2. Running the Demo
+- Run the Gradio demo for video-based wildfire detection:
 ```bash
 python gradio_app.py
 ```
-- Upload a drone video
+- Open http://localhost in your browser
+- Upload a drone video to see results
+
+---
+## **Demo Application**
+- Run the Gradio demo for video-based wildfire detection:
+```bash
+python gradio_app.py
+```
+- Open http://localhost in your browser
+- Upload a drone video to see results
 - Visualize wildfire segmentation masks
 - View alert metadata in real time
 
@@ -197,6 +206,8 @@ demo/demo_gif.gif
 <p align="center">
   <img src="demo/demo_gif.gif" alt="CS406.Q11_Wildfire-Semantic-Segmentation-and-Alert-System-for-Drones-via-Deep-Learning-Project Demo" width="900">
 </p>
+
+
 --- 
 ## **Results**
 - Accurate pixel-level wildfire segmentation on the FLAME dataset.
