@@ -69,6 +69,10 @@
 - Images → RGB aerial images
 - Masks → Binary wildfire segmentation masks
 
+<p align="center">
+  <img src="demo/data.png" alt="demo data" width="400">
+</p>
+
 ---
 
 ## **Repository Structure**
