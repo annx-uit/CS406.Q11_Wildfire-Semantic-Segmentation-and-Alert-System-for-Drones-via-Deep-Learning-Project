@@ -93,6 +93,8 @@ CS406.Q11_Wildfire-Semantic-Segmentation-and-Alert-System-for-Drones-via-Deep-Le
 │ │ ├── images/
 │ │ └── masks/
 │
+├── sample-data/ 
+|
 ├── src/ # Jupyter notebooks (training & evaluation)
 │ ├── lightning_logs/ # PyTorch Lightning logs [ignored]
 │ ├── split_flame_raw-dataset.ipynb
@@ -101,8 +103,11 @@ CS406.Q11_Wildfire-Semantic-Segmentation-and-Alert-System-for-Drones-via-Deep-Le
 │
 ├── models/ # Trained model checkpoints (.ckpt) [ignored]
 ├── docs/
-│ ├── CS406.Q11-Nhom9_slide.pdf
-│ └── CS406.Q11-Nhom9_report.pdf
+│ ├── latex-file/
+│ ├── figs/    # Images for report and slide
+│ ├── Template_BaocaoDoAnCuoiKy.docx
+│ ├── CS406.Q11-Group9-23520023-23520032-23520213-23521143_Slide.pdf
+│ └── CS406.Q11-Group9-23520023-23520032-23520213-23521143_Report.pdf
 │
 ├── demo/
 │ ├── demo_video.mp4
